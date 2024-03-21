@@ -11,10 +11,12 @@
             <input type="checkbox" v-model="completed" @change="doneEdit">
             <div class="todo-item-label" v-if="!editing" @dblclick="editTodo" :class="{completed : completed}">{{ title }}</div>
             <input type="text" class="todo-item-edit" v-model="title" v-else @blur="doneEdit" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" v-focus>
-    
         </div>
-        <div class="remove-item" @click="removeTodo(index)">
-            &times;
+        <div>
+            <button @click="pluralize">Plural</button>
+            <span class="remove-item" @click="removeTodo(index)">
+                &times;
+            </span>
         </div>
     </div>
 </template>
@@ -59,8 +61,9 @@ export default {
     },
 
     methods: {
+
         removeTodo(index) {
-            this.$emit('removeTodo', index)
+            this.emitter.emit('removeTodo', index)
         },
 
         editTodo(){
@@ -74,7 +77,7 @@ export default {
             }
             
             this.editing = false
-            this.$emit('finishedEdit', {
+            this.emitter.emit('finishedEdit', {
                 'index': this.index,
                 'todo': {
                     'id': this.id,
@@ -89,6 +92,32 @@ export default {
             this.title = this.beforeCache
             this.editing = false
         },
+
+        pluralize() {
+            this.emitter.emit('pluralize')
+        },
+
+        handlePluralize() {
+            this.title = this.title + 's'
+
+            this.emitter.emit('finishedEdit', {
+                'index': this.index,
+                'todo': {
+                    'id': this.id,
+                    'title': this.title,
+                    'completed': this.completed,
+                    'editing': this.editing,
+                }
+            })
+        }
+    },
+
+    created() {
+        this.emitter.on('pluralize', this.handlePluralize)
+    },
+
+    beforeUnmount() {
+        this.emitter.off('pluralize', this.handlePluralize)
     }
 }
 

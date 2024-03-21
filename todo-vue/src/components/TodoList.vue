@@ -4,7 +4,8 @@
         <input type="text" class="todo-input" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
 
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-            <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" @removeTodo="removeTodo" @finishedEdit="finishedEdit" :checkAll="!anyRemainig">
+            <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index"  :checkAll="!anyRemainig">
+            <!-- @removeTodo="removeTodo" @finishedEdit="finishedEdit" -->
 
                 
             </todo-item>
@@ -13,8 +14,11 @@
         <div class="extra-container">
             <div>
                 <label><input type="checkbox" :checked="!anyRemainig" @change="checkAllTodos">Check All</label>
+                <todo-items-remainig>
+                    <!-- PAREI AQUI MINUTO DO VÍDEO: 13:37 -->
+                </todo-items-remainig>
             </div>
-            <div>{{ remaining }} itens left</div>
+            
         </div>
 
         <div class="extra-container">
@@ -36,11 +40,13 @@
   <script>
 // import { remove } from "@vue/shared"
 import TodoItem from "./TodoItem"
+import TodoItemsRemainig from "./TodoItemRemaining"
 
   export default {
     name: 'todo-list',
     components: {
         TodoItem,
+        TodoItemsRemainig
     },  
     data(){
         return {
@@ -130,6 +136,16 @@ import TodoItem from "./TodoItem"
         showClearCompletedButton() {
             return this.todos.filter(todo => todo.completed).length > 0
         }
+    },
+
+    created() {
+        
+    this.emitter.on('removeTodo', (index) => this.removeTodo(index))
+    this.emitter.on('finishedEdit', (data) => this.finishedEdit(data))
+
+    // this.emitter.on("toggle-sidebar", isOpen => {
+    //     this.isOpen = isOpen;
+    // });
 
     }
 }
