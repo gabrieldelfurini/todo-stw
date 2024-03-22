@@ -12,8 +12,8 @@
         </transition-group>
 
         <div class="extra-container">
-            <todo-check-all :anyRemaining="anyRemaining" ></todo-check-all>
-            <todo-items-remainig :remaining="remaining"></todo-items-remainig>
+            <todo-check-all></todo-check-all>
+            <todo-items-remainig ></todo-items-remainig>
         </div>
 
         <div class="extra-container">
@@ -21,7 +21,7 @@
 
             <div>
                 <transition name="fade">
-                    <todo-clear-completed :showClearCompletedButton="showClearCompletedButton"></todo-clear-completed>
+                    <todo-clear-completed></todo-clear-completed>
                     
                 </transition>
             </div>
@@ -50,22 +50,6 @@ import TodoClearCompleted from "./TodoClearCompleted"
         return {
             newTodo: "",
             idForTodo: 3,
-            beforeCache: '',
-            filter: 'all',
-            todos: [
-                {
-                    'id': 1,
-                    'title': 'Finish Vue Screencast',
-                    'completed': false,
-                    'editing': false
-                },
-                {
-                    'id': 2,
-                    'title': 'Take ovwe world',
-                    'completed': false,
-                    'editing': false
-                }
-            ]
         }
     },
 
@@ -83,74 +67,30 @@ import TodoClearCompleted from "./TodoClearCompleted"
                 return
             }
 
-            this.todos.push({
+            this.$store.dispatch('addTodo', {
                 id: this.idForTodo,
                 title: this.newTodo,
-                completed: false
             })
 
             this.newTodo = ''
             this.idForTodo++
         },
 
-        removeTodo(index){
-            this.todos.splice(index, 1)
-        },
-
-        checkAllTodos() {
-            this.todos.forEach(todo => todo.completed = event.target.checked)
-        },
-
-        clearCompleted() {
-            this.todos = this.todos.filter(todo => !todo.completed)
-        },
-
-        finishedEdit(data) {
-            this.todos.splice(data.index, 1, data.todo)
-        }
+        
     },
 
     computed: {
-        remaining() {
-            return this.todos.filter(todo => !todo.completed).length
-        },
 
         anyRemainig(){
-            return this.remaining != 0
+            return this.$store.getters.anyRemaining
         },        
 
         todosFiltered() {
-            if(this.filter == 'all'){
-                return this.todos
-            }else if(this.filter == 'active'){
-                return this.todos.filter(todo => !todo.completed)
-            }else if(this.filter == 'completed') {
-                return this.todos.filter(todo => todo.completed)
-            }
-
-            return this.todos
+            return this.$store.getters.todosFiltered
         },
-
-        showClearCompletedButton() {
-            return this.todos.filter(todo => todo.completed).length > 0
-        }
     },
 
-    created() {
-        this.emitter.on('removeTodo', (index) => this.removeTodo(index))
-        this.emitter.on('finishedEdit', (data) => this.finishedEdit(data))
-        this.emitter.on('checkAllChanged', (checked) => this.checkAllTodos(checked))
-        this.emitter.on('filterChanged', (filter) => this.filter = filter)
-        this.emitter.on('clearCompletedTodos', () => this.clearCompleted())
-    },
-
-    beforeUnmount() {
-        this.emitter.off('removeTodo', (index) => this.removeTodo(index))
-        this.emitter.off('finishedEdit', (data) => this.finishedEdit(data))
-        this.emitter.off('checkAllChanged', (checked) => this.checkAllTodos(checked))
-        this.emitter.off('filterChanged', (filter) => this.filter = filter)
-        this.emitter.off('clearCompletedTodos', () => this.clearCompleted())
-    }
+    
 }
   </script>
   
