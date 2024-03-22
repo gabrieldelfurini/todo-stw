@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
+  <div class="container"> 
     <img alt="Vue logo" src="./assets/logo.png" class="logo">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <TodoList></TodoList>
+    <todo-list></todo-list>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import TodoList from './components/TodoList.vue'
+// import Master from './components/layouts/Master.vue';
+// import Master from './components/layouts/Master.vue'
 
 export default {
   name: 'App',
@@ -28,15 +28,14 @@ export default {
   margin: 0 auto;
 }
 
-#app {
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
   font-size: 24px;
-}
+} */
 
 .logo {
   display: block;

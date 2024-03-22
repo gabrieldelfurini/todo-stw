@@ -7,7 +7,6 @@
             <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index"  :checkAll="!anyRemainig">
             <!-- @removeTodo="removeTodo" @finishedEdit="finishedEdit" -->
 
-                
             </todo-item>
         </transition-group>
 
@@ -90,7 +89,9 @@ import TodoClearCompleted from "./TodoClearCompleted"
         },
     },
 
-    
+    created() {
+        this.$store.dispatch('retrieveTodos')
+    }
 }
   </script>
   
