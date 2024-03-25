@@ -21,7 +21,7 @@ export default {
   box-sizing: border-box;
 } */
 
-.container {
+.contfiner {
   max-width: 600px;
   margin: 0 auto;
 }
