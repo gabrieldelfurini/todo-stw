@@ -16,3 +16,4 @@ class TodoSeeder extends Seeder
         //
     }
 }
+
