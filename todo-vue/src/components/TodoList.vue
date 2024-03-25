@@ -160,6 +160,8 @@ import TodoClearCompleted from "./TodoClearCompleted"
         font-size: 14px;
         background-color: white;
         appearance: none;
+        padding: 4px;
+        margin: 2px;
     }
     
     button:hover {

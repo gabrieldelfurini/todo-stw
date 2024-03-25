@@ -1,5 +1,5 @@
 <template>
-  <div class="container"> 
+  <div class="container" id="app"> 
     <img alt="Vue logo" src="./assets/logo.png" class="logo">
     <todo-list></todo-list>
   </div>
@@ -7,8 +7,6 @@
 
 <script>
 import TodoList from './components/TodoList.vue'
-// import Master from './components/layouts/Master.vue';
-// import Master from './components/layouts/Master.vue'
 
 export default {
   name: 'App',
@@ -19,9 +17,9 @@ export default {
 </script>
 
 <style>
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 .container {
   max-width: 600px;

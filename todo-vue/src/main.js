@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import Master from './components/layouts/Master.vue'
 import mitt from 'mitt';
 import store from './store/store.js';
-import router from './router/index';
+import router from './router/index.js';
 
 
 const emitter = mitt();
