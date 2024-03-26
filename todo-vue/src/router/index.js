@@ -35,7 +35,8 @@ const router = createRouter({
       component: Login,
       meta: {
         requiresVisitor: true,
-      }
+      },
+      props: true
     },
     {
       path: "/register",

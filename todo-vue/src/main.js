@@ -4,7 +4,14 @@ import Master from './components/layouts/Master.vue'
 import mitt from 'mitt';
 import store from './store/store.js';
 import router from './router/index.js';
+// import CxltToastr from 'cxlt-vue2-toastr'
 
+// const toastrConfigs = {
+//   position: 'bottom right',
+//   showDuration: 2000,
+//   timeOut: 5000,
+//   progressBar: true,
+// }
 
 const emitter = mitt();
 
@@ -39,9 +46,6 @@ router.beforeEach((to, from, next) => {
   })
 
 
-
 app.use(router)
 app.use(store)
 app.mount('#app')
-
-// export default router;

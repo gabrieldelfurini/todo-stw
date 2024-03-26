@@ -1,6 +1,11 @@
 
 <template>
     <div>
+
+        <div class="name-container">
+            Welcome, {{ name }}
+        </div>
+
         <input type="text" class="todo-input" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
 
         <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
@@ -49,6 +54,7 @@ import TodoClearCompleted from "./TodoClearCompleted"
         return {
             newTodo: "",
             idForTodo: 3,
+            name: '',
         }
     },
 
@@ -91,6 +97,10 @@ import TodoClearCompleted from "./TodoClearCompleted"
 
     created() {
         this.$store.dispatch('retrieveTodos')
+        this.$store.dispatch('retrieveName')
+            .then(response => {
+                this.name = response.data.name
+            })
     }
 }
   </script>
@@ -182,6 +192,10 @@ import TodoClearCompleted from "./TodoClearCompleted"
 
     .fade-enter, .fade-leave-to {
         opacity: 0;
+    }
+
+    .name-container {
+        margin-bottom: 16px;
     }
   </style>
   
