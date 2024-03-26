@@ -14,6 +14,32 @@ export const eventBus = createApp(Master)
 
 app.config.globalProperties.emitter = emitter;
 
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!store.getters.loggedIn) {
+        next({
+          name: 'login',
+        })
+      } else {
+        next()
+      }
+    } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+      if (store.getters.loggedIn) {
+        next({
+          name: 'todo',
+        })
+      } else {
+        next()
+      }
+    } else {
+      next()
+    }
+  })
+
+
+
 app.use(router)
 app.use(store)
 app.mount('#app')

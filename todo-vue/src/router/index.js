@@ -6,7 +6,6 @@ import About from "@/components/marketing/About.vue";
 import Login from "@/components/auth/Login.vue";
 import Logout from "@/components/auth/Logout.vue";
 import Register from "@/components/auth/Register.vue";
-import TestTodosVariable from "@/components/marketing/TestTodosVariable.vue";
 
 
 const router = createRouter({
@@ -21,6 +20,9 @@ const router = createRouter({
         path: "/todo",
         name: "todo",
         component: App,
+        meta: {
+          requiresAuth: true,
+        }
     },
     {
       path: "/about",
@@ -31,16 +33,17 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: Login,
+      meta: {
+        requiresVisitor: true,
+      }
     },
     {
       path: "/register",
       name: "register",
       component: Register,
-    },
-    {
-      path: "/todos/:id",
-      name: "todos",
-      component: TestTodosVariable,
+      meta: {
+        requiresVisitor: true,
+      }
     },
     {
       path: "/logout",
