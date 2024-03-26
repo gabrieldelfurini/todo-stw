@@ -1,5 +1,5 @@
 <template>
-    <div class="login-form">
+    <div class="login-form page-wrapper">
         <h2 class="login-heading">Register</h2>
     
             
@@ -97,7 +97,6 @@ export default {
             //     .catch(error => {
             //         this.serverErrors = Object.values(error.response.data.errors)
             //     })
-            
         },
 
         validateEmail(value) {

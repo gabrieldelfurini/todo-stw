@@ -107,7 +107,6 @@ import TodoClearCompleted from "./TodoClearCompleted"
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style>
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
   
   .todo-input {
     width: 100%;

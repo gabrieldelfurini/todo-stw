@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page-wrapper">
         <h1>landing page</h1>
     </div>
 </template>

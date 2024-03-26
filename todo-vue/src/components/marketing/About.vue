@@ -1,5 +1,7 @@
 <template>
-    <h1>abou</h1>
+    <div class="page-wrapper">
+        <h1>abou</h1>
+    </div>
 </template>
 
 <script>
