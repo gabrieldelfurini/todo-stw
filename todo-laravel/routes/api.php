@@ -16,19 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth:api')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/todos', [TodosController::class, 'index']);
+    Route::post('/todos', [TodosController::class, 'store']);
+    Route::patch('/todos/{todo}', [TodosController::class, 'update']);
+    Route::delete('/todos/{todo}', [TodosController::class, 'destroy']);
+    Route::patch('/todosCheckAll', [TodosController::class, 'updateAll']);
+    Route::delete('/todosDeleteCompleted', [TodosController::class, 'destroyCompleted']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
 
 
 
-Route::get('/todos', [TodosController::class, 'index']);
-Route::post('/todos', [TodosController::class, 'store']);
-Route::patch('/todos/{todo}', [TodosController::class, 'update']);
-Route::delete('/todos/{todo}', [TodosController::class, 'destroy']);
-Route::patch('/todosCheckAll', [TodosController::class, 'updateAll']);
-Route::delete('/todosDeleteCompleted', [TodosController::class, 'destroyCompleted']);
