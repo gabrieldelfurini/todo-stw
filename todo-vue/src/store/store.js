@@ -110,6 +110,7 @@ export default createStore({
               localStorage.removeItem('access_token')
               context.commit('destroyToken')
               resolve(response)
+              
               // console.log(response);
               // context.commit('addTodo', response.data)
             })
@@ -126,15 +127,16 @@ export default createStore({
 
       return new Promise((resolve, reject) => {
         axios.post('/login', {
-          username: credentials.username,
+          email: credentials.username,
           password: credentials.password,
         })
-          .then(response => {
+          .then(response => {            
             const token = response.data.access_token
 
             localStorage.setItem('access_token', token)
             context.commit('retrieveToken', token)
             resolve(response)
+            
             // console.log(response);
             // context.commit('addTodo', response.data)
           })
@@ -151,6 +153,7 @@ export default createStore({
       axios.get('/todos')
         .then(response => {
           context.commit('retrieveTodos', response.data)
+
         })
         .catch(error => {
           console.log(error)

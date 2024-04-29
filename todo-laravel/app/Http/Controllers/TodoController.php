@@ -3,35 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
+use Illuminate\Http\Request;
 
-class TodosController extends Controller
+class TodoController extends Controller
 {
-    /*
+    /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     *
      */
-
     public function index()
     {
         return Todo::where('user_id', auth()->user()->id)->get();
     }
 
+
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTodoRequest  $request
-     * @return \Illuminate\Http\Response
-     *
      */
     public function store(StoreTodoRequest $request)
     {
-
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required|string',
             'completed' => 'required|boolean'
         ]);
@@ -47,23 +40,22 @@ class TodosController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Todo  $todo
-     * @return \Illuminate\Http\Response
      */
     public function show(Todo $todo)
     {
         //
     }
 
-
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Todo $todo)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTodoRequest  $request
-     * @param  \App\Models\Todo  $todo
-     * @return \Illuminate\Http\Response
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
@@ -82,22 +74,8 @@ class TodosController extends Controller
         return response($todo, 200);
     }
 
-    public function updateAll(Request $request)
-    {
-        $data = $request->validate([
-            'completed' => 'required|boolean',
-        ]);
-
-        Todo::where('user_id', auth()->user()->id)->update($data);
-
-        return response('Updated', 200);
-    }
-
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Todo  $todo
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Todo $todo)
     {
@@ -109,6 +87,7 @@ class TodosController extends Controller
         $todo->delete();
 
         return response('Delted Todo Item', 200);
+
     }
 
     public function destroyCompleted(Request $request)
@@ -138,4 +117,14 @@ class TodosController extends Controller
         return response('Deleted', 200);
     }
 
+    public function updateAll(Request $request)
+    {
+        $data = $request->validate([
+            'completed' => 'required|boolean',
+        ]);
+
+        Todo::where('user_id', auth()->user()->id)->update($data); 
+
+        return response('Updated', 200);
+    }
 }

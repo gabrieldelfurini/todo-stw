@@ -84,19 +84,19 @@ export default {
     methods: {
         register() {
 
-            // this.$store.dispatch('register', {
-            //     name: this.name,
-            //     email: this.email,
-            //     password: this.password,
-            // })
-            //     .then(() => {
-            //         this.$router.push({ name: 'login', params: { dataSuccessMessage: this.successMessage } })
-                        // this.successMessage = 'Registered Successfully!'
+            this.$store.dispatch('register', {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+            })
+                .then(() => {
+                    this.$router.push({ name: 'login', params: { dataSuccessMessage: this.successMessage } })
+                        this.successMessage = 'Registered Successfully!'
 
-            //     })
-            //     .catch(error => {
-            //         this.serverErrors = Object.values(error.response.data.errors)
-            //     })
+                })
+                .catch(error => {
+                    this.serverErrors = Object.values(error.response.data.errors)
+                })
         },
 
         validateEmail(value) {

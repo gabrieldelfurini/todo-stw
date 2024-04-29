@@ -1,7 +1,7 @@
 <template>
     <div class="login-form page-wrapper">
       <h2 class="login-heading">Login</h2>
-      <Form action="#" @submit.prevent="login">
+      <Form action="#" @submit="login">
 
         <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
         <div v-if="serverError" class="server-error">{{ serverError }}</div>
@@ -87,6 +87,7 @@
     methods: {
 
       login() {
+
         this.loading = true
         this.$store.dispatch('retrieveToken', {
           username: this.username,
@@ -98,7 +99,7 @@
           })
           .catch(error => {
             this.loading = false
-            this.serverError = error.response.data
+            this.serverError = error.response.data.message
             this.password = ''
             this.successMessage = ''
         })

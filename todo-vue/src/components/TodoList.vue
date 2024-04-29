@@ -1,6 +1,5 @@
-
 <template>
-    <div>
+    <div class="container-principal">
 
         <div class="name-container">
             Welcome, {{ name }}
@@ -31,7 +30,7 @@
             </div>
         </div>
     </div>
-  </template>
+</template>
   
   <script>
 // import { remove } from "@vue/shared"
@@ -195,6 +194,11 @@ import TodoClearCompleted from "./TodoClearCompleted"
 
     .name-container {
         margin-bottom: 16px;
+    }
+
+    .container-principal {
+        width: 60vw;
+        margin: auto;
     }
   </style>
   

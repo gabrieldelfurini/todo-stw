@@ -14,7 +14,7 @@
         </div>
         <div>
             <button @click="pluralize">Plural</button>
-            <span class="remove-item" @click="removeTodo(index)">
+            <span class="remove-item" @click="removeTodo(this.id)">
                 &times;
             </span>
         </div>
@@ -43,9 +43,9 @@ export default {
         return {
             'id': this.todo.id,
             'title': this.todo.title,
-            'completed': this.todo.completed,
+            'completed': this.todo.completed ? true : false,
             'editing': this.todo.editing,
-            'beforeEditCache': '',        
+            'beforeEditCache': '',
         }
     },
 
@@ -107,18 +107,26 @@ export default {
         handlePluralize() {
             this.title = this.title + 's'
 
-            const index = this.$store.state.todos.findIndex(item => item.id == this.id)
-            this.$store.state.todos.splice(index, 1, {
+            this.$store.dispatch('updateTodo', {
                 'id': this.id,
                 'title': this.title,
                 'completed': this.completed,
-                'editing': this.editing
+                'editing': this.editing,
             })
+
+            // const index = this.$store.state.todos.findIndex(item => item.id == this.id)
+            // this.$store.state.todos.splice(index, 1, {
+            //     'id': this.id,
+            //     'title': this.title,
+            //     'completed': this.completed,
+            //     'editing': this.editing
+            // })
         }
     },
 
     created() {
         this.emitter.on('pluralize', this.handlePluralize)
+
     },
 
     beforeUnmount() {
