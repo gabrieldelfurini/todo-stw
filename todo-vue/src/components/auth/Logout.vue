@@ -1,5 +1,6 @@
 <template>
-    <h1>logout</h1>
+    <!-- <h1>logout</h1> -->
+    <div></div>
 </template>
 
 <script>

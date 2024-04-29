@@ -90,8 +90,14 @@ export default {
                 password: this.password,
             })
                 .then(() => {
-                    this.$router.push({ name: 'login', params: { dataSuccessMessage: this.successMessage } })
-                        this.successMessage = 'Registered Successfully!'
+                    // this.$router.push({ name: 'login', params: { dataSuccessMessage: this.successMessage } })
+                    // this.successMessage = 'Registered Successfully!'
+
+                    this.emitter.emit('registeredSuccessfully')
+                    
+                    this.$router.push({ name: 'login'})
+
+
 
                 })
                 .catch(error => {

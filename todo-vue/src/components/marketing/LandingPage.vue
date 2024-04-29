@@ -1,6 +1,6 @@
 <template>
-    <div class="page-wrapper">
-        <h1>landing page</h1>
+    <div class="login-form page-wrapper">
+        <h2> Conteúdo da Landing Page Aqui</h2>
     </div>
 </template>
 

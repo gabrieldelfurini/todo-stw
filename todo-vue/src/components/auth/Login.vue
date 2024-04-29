@@ -18,7 +18,7 @@
           />
           <ErrorMessage name="email" class="form-error"/>
         </div>
-  
+
         <div class="form-control mb-more">
           <label for="password">Password</label>
           <Field 
@@ -65,25 +65,23 @@
         username: '',
         password: '',
         serverError: '',
-        successMessage: this.dataSuccessMessage,
+        // successMessage: this.dataSuccessMessage,
+        successMessage: '',
         loading: false
       }
     },
 
     props: {
-      dataSuccessMessage: {
-        type: String,
-      }
+      // dataSuccessMessage: {
+      //   type: String,
+      // }
     },
 
-    created(){
-      if(this.successMessage){
-        toast.success('registrado com Sucesso!',{
-          autoClose: 3000
-        });
-      }
+    mounted(){
+
+      this.emitter.on('registeredSuccessfully', this.registeredSuccessfully)
     },
-    
+
     methods: {
 
       login() {
@@ -130,8 +128,20 @@
             if(value.length < 6){
                 return 'Tem que ter no mínimo 6 digitos.';
             }
-            
+
             return true;
+        },
+
+        registeredSuccessfully() {
+
+          
+          setTimeout(function () {
+            this.successMessage = "Registrado Com Sucesso!"
+
+            toast.success('Faça Login Aqui!',{
+              autoClose: 3000
+            })
+          }, 3000);
         }
     }
   }

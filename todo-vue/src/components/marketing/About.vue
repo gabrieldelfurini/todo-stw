@@ -1,6 +1,6 @@
 <template>
-    <div class="page-wrapper">
-        <h1>abou</h1>
+    <div class="login-form page-wrapper">
+        <h2>Conteúdo do About Aqui</h2>
     </div>
 </template>
 
